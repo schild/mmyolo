@@ -9,17 +9,21 @@ from torch.nn.modules.batchnorm import _BatchNorm
 
 def is_block(modules):
     """Check if is ResNet building block."""
-    if isinstance(modules, (BasicBlock, Bottleneck, BottleneckX, Bottle2neck,
-                            SimplifiedBasicBlock)):
-        return True
-    return False
+    return isinstance(
+        modules,
+        (
+            BasicBlock,
+            Bottleneck,
+            BottleneckX,
+            Bottle2neck,
+            SimplifiedBasicBlock,
+        ),
+    )
 
 
 def is_norm(modules):
     """Check if is one of the norms."""
-    if isinstance(modules, (GroupNorm, _BatchNorm)):
-        return True
-    return False
+    return isinstance(modules, (GroupNorm, _BatchNorm))
 
 
 def check_norm_state(modules, train_state):
